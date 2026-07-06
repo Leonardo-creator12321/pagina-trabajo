@@ -72,9 +72,9 @@ CREATE POLICY "CEO can update submission status"
     )
   );
 
--- Create storage bucket for work evidence
+-- Create storage bucket for work evidence (public so authenticated users can view files via public URLs)
 INSERT INTO storage.buckets (id, name, public)
-VALUES ('work-evidence', 'work-evidence', false)
+VALUES ('work-evidence', 'work-evidence', true)
 ON CONFLICT (id) DO NOTHING;
 
 -- Storage policies
@@ -103,3 +103,27 @@ CREATE POLICY "CEO can read all files"
       SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'ceo'
     )
   );
+
+-- Trigger to automatically create a profile row when a new user registers
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO public.profiles (id, email, name, role)
+  VALUES (
+    NEW.id,
+    COALESCE(NEW.email, ''),
+    COALESCE(NEW.raw_user_meta_data->>'name', split_part(COALESCE(NEW.email, ''), '@', 1)),
+    COALESCE(NEW.raw_user_meta_data->>'role', 'developer')
+  );
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+CREATE OR REPLACE TRIGGER on_auth_user_created
+  AFTER INSERT ON auth.users
+  FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
+
+-- Allow the trigger function to insert into profiles
+CREATE POLICY "Service role can insert profiles"
+  ON profiles FOR INSERT
+  WITH CHECK (true);

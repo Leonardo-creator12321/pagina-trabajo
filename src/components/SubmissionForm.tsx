@@ -104,20 +104,22 @@ export function SubmissionForm({ onSubmissionCreated }: SubmissionFormProps) {
         />
       </div>
 
-      {/* Description */}
-      <div>
-        <label htmlFor="description" className="mb-1.5 block text-sm font-medium text-foreground">
-          Description
-        </label>
-        <textarea
-          id="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Optional description"
-          rows={3}
-          className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder-muted focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-        />
-      </div>
+      {/* Description (hidden for notes since note content IS the description) */}
+      {fileType !== 'note' && (
+        <div>
+          <label htmlFor="description" className="mb-1.5 block text-sm font-medium text-foreground">
+            Description
+          </label>
+          <textarea
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Optional description"
+            rows={3}
+            className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder-muted focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+          />
+        </div>
+      )}
 
       {/* File Type Selector */}
       <div>

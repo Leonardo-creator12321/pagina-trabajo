@@ -33,11 +33,12 @@ export default async function DeveloperDetailPage({
     redirect('/dashboard');
   }
 
-  // Fetch the developer profile
+  // Fetch the developer profile (verify that the ID belongs to a developer)
   const { data: developer } = await supabase
     .from('profiles')
     .select('*')
     .eq('id', id)
+    .eq('role', 'developer')
     .single();
 
   if (!developer) {
