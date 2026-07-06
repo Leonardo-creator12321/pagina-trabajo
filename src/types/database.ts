@@ -4,15 +4,15 @@ export type FileType = 'pdf' | 'image' | 'video' | 'note';
 
 export type SubmissionStatus = 'pending' | 'approved' | 'rejected';
 
-export interface Profile {
+export type Profile = {
   id: string;
   email: string;
   name: string;
   role: Role;
   avatar_url: string | null;
-}
+};
 
-export interface Submission {
+export type Submission = {
   id: string;
   developer_id: string;
   title: string;
@@ -21,15 +21,16 @@ export interface Submission {
   file_type: FileType;
   status: SubmissionStatus;
   created_at: string;
-}
+};
 
-export interface Database {
+export type Database = {
   public: {
     Tables: {
       profiles: {
         Row: Profile;
         Insert: Omit<Profile, 'id'> & { id?: string };
         Update: Partial<Profile>;
+        Relationships: [];
       };
       submissions: {
         Row: Submission;
@@ -38,7 +39,14 @@ export interface Database {
           created_at?: string;
         };
         Update: Partial<Submission>;
+        Relationships: [];
       };
     };
+    Views: {
+      [_ in never]: never;
+    };
+    Functions: {
+      [_ in never]: never;
+    };
   };
-}
+};
