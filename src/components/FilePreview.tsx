@@ -57,18 +57,22 @@ export function FilePreview({ fileUrl, fileType, textContent }: FilePreviewProps
 
   if (fileType === 'pdf') {
     return (
-      <a
-        href={fileUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center gap-3 rounded-lg border border-border bg-background p-4 transition-colors hover:border-primary"
-      >
-        <span className="text-2xl">📄</span>
-        <div>
-          <p className="text-sm font-medium text-foreground">PDF Document</p>
-          <p className="text-xs text-muted">Click to open in new tab</p>
-        </div>
-      </a>
+      <div className="overflow-hidden rounded-lg border border-border">
+        <iframe
+          src={fileUrl}
+          title="PDF Preview"
+          className="h-96 w-full"
+        />
+        <a
+          href={fileUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 border-t border-border bg-background p-3 text-xs text-primary transition-colors hover:bg-primary/5"
+        >
+          <span>📄</span>
+          <span>Open in new tab</span>
+        </a>
+      </div>
     );
   }
 
