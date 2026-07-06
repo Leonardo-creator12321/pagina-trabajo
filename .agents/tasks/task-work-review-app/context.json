@@ -1,0 +1,29 @@
+{
+  "project_type": "Next.js 16 App Router + Supabase (Auth, Database, Storage)",
+  "language": "TypeScript",
+  "build_system": "Next.js with npm, deployable on Vercel",
+  "test_framework": "None - uses npm run build for validation",
+  "build_command": "npm run build",
+  "test_command": "npm run build",
+  "verification_instructions": "Run npm run build to ensure TypeScript compiles and Next.js builds successfully",
+  "snapshot_or_generated_files": null,
+  "setup_instructions": "npm install, copy .env.local.example to .env.local, configure Supabase credentials, npm run dev",
+  "environment_constraints": "Open internet available. Supabase project not connected - app is ready to connect with env vars.",
+  "contribution_requirements": "Greenfield project - no existing contribution guidelines",
+  "key_patterns": "Next.js App Router with Server/Client components, Supabase SSR pattern, type aliases for Database types, Tailwind CSS v4 with @theme in globals.css",
+  "relevant_files": [
+    "src/app/layout.tsx",
+    "src/app/page.tsx",
+    "src/app/login/page.tsx",
+    "src/app/dashboard/page.tsx",
+    "src/app/dashboard/ceo/page.tsx",
+    "src/app/dashboard/developer/[id]/page.tsx",
+    "src/app/dashboard/my-panel/page.tsx",
+    "src/lib/supabase/client.ts",
+    "src/lib/supabase/server.ts",
+    "src/middleware.ts",
+    "src/types/database.ts",
+    "supabase/migrations/001_initial_schema.sql"
+  ],
+  "directory_structure": "src/app/ for routes and pages, src/lib/ for utilities (Supabase clients), src/components/ for shared UI components, src/hooks/ for React hooks, src/types/ for TypeScript types, supabase/ for migrations and seed SQL"
+}
