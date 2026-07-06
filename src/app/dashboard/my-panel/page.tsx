@@ -1,7 +1,13 @@
+import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { Header } from '@/components/Header';
 import { DeveloperPanelContent } from './DeveloperPanelContent';
+
+export const metadata: Metadata = {
+  title: 'Mi Panel - Game Dev Work Review',
+  description: 'Panel personal del desarrollador para gestionar entregas',
+};
 
 export default async function MyPanelPage() {
   const supabase = await createClient();

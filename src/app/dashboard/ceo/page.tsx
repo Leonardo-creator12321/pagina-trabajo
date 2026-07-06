@@ -1,7 +1,13 @@
+import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { Header } from '@/components/Header';
 import { DeveloperCard } from '@/components/DeveloperCard';
+
+export const metadata: Metadata = {
+  title: 'Dashboard CEO - Game Dev Work Review',
+  description: 'Panel de control del CEO para revisar entregas del equipo',
+};
 
 export default async function CeoDashboardPage() {
   const supabase = await createClient();
