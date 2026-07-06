@@ -1,0 +1,28 @@
+{
+  "id": "FEAT-004",
+  "type": "feat",
+  "description": "Developer Panel: Create the developer's workspace with file upload, notes, and submission history",
+  "status": "in_progress",
+  "steps": [
+    "Create src/app/dashboard/my-panel/page.tsx - developer panel page",
+    "Create src/components/SubmissionForm.tsx - client component for submissions",
+    "Create src/components/FileUploader.tsx - file upload handler",
+    "Create src/app/api/submissions/route.ts - API route for creating/fetching submissions",
+    "Create src/components/SubmissionHistory.tsx - fetch and display developer submissions",
+    "Create src/components/FilePreview.tsx - preview component for various file types"
+  ],
+  "acceptance_criteria": [
+    "Developer panel page verifies user role and redirects CEO",
+    "Submission form handles both file uploads and text notes",
+    "File uploader validates types and uploads to Supabase Storage",
+    "API route creates submissions and fetches current user's submissions",
+    "Submission history displays using SubmissionList with showActions=false",
+    "File preview renders appropriate UI based on file type",
+    "npm run build completes without errors"
+  ],
+  "verification": [
+    "Run npm run build and confirm successful compilation with zero errors"
+  ],
+  "blocked_reason": null,
+  "findings": null
+}
