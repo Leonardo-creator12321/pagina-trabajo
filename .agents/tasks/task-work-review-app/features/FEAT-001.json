@@ -1,0 +1,35 @@
+{
+  "id": "FEAT-001",
+  "type": "feat",
+  "description": "Project scaffolding: Create the Next.js app with App Router, TypeScript, Tailwind CSS, Supabase client libraries, database types, migration SQL files, middleware for auth, and the complete project configuration. This is the foundation that all other features build upon.",
+  "status": "in_progress",
+  "steps": [
+    "Initialize a Next.js 14+ project with TypeScript, Tailwind CSS, ESLint, and App Router in /projects/sandbox/pagina-trabajo/ (use npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --use-npm --import-alias '@/*')",
+    "Install Supabase dependencies: @supabase/supabase-js @supabase/ssr",
+    "Create src/types/database.ts with TypeScript types for the database schema: profiles table (id uuid, email text, name text, role 'ceo'|'developer', avatar_url text|null) and submissions table (id uuid, developer_id uuid, title text, description text|null, file_url text|null, file_type 'pdf'|'image'|'video'|'note', status 'pending'|'approved'|'rejected', created_at timestamp)",
+    "Create src/lib/supabase/client.ts - browser Supabase client using createBrowserClient from @supabase/ssr",
+    "Create src/lib/supabase/server.ts - server Supabase client using createServerClient from @supabase/ssr with cookies()",
+    "Create src/lib/supabase/middleware.ts - middleware helper that refreshes auth session",
+    "Create src/middleware.ts that uses the middleware helper to protect routes (redirect unauthenticated users to /login, redirect authenticated users away from /login to /dashboard)",
+    "Create .env.local.example with NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY placeholders",
+    "Create supabase/migrations/001_initial_schema.sql with: profiles table, submissions table, RLS policies (developers can only read/insert their own submissions, CEO can read all and update status), storage bucket 'work-evidence' setup",
+    "Create supabase/seed.sql with sample data: 1 CEO account and 4 developer accounts with profile entries",
+    "Configure tailwind.config.ts for dark mode ('class' strategy) with custom color palette suitable for a dark gaming-studio theme",
+    "Update src/app/layout.tsx with dark theme (dark background, light text), proper metadata (title: 'Game Dev Work Review'), and the Inter/custom font",
+    "Create src/app/globals.css with Tailwind directives and custom dark theme styles"
+  ],
+  "acceptance_criteria": [
+    "npm run build completes without errors",
+    "All TypeScript types compile correctly",
+    "Middleware is configured to handle auth redirects",
+    "SQL migration file contains valid Supabase schema with RLS policies",
+    "Environment variable template exists with required Supabase keys",
+    "Tailwind is configured with dark theme as default"
+  ],
+  "verification": [
+    "Run npm install and confirm no errors",
+    "Run npm run build and confirm successful compilation with zero errors"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}
